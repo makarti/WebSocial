@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "Web"
+		},
+		{
+			"path": "Common"
+		}
+	],
+	"settings": {
+		"files.exclude":{
+			"**/bin": true,
+			"**/obj": true,
+			"**/*.sln": true
+		}
+	}
+}
