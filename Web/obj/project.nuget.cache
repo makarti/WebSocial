@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "VFsHwd6T6bBfibjtf6oz5no3/msUgggWeRiQQ+1Kh07LVMrfY/jjKrSGtYHtJMhu1QNUwE5ZaniceN76Tcqwag==",
+  "dgSpecHash": "jTKpYI8UUO+pGD8oTEteeQX7AMHwS9+0LPBHaykhpBZOiScSHkWxFT/xHIou/yCNtcAC5B+wkBNDiHIVYGxygA==",
   "success": true,
   "projectFilePath": "/home/artur/Документы/WebApps/WebSocial/Web/Web.csproj",
   "expectedPackageFiles": [
@@ -24,7 +24,7 @@
     "/home/artur/.nuget/packages/microsoft.aspnetcore.hosting.abstractions/2.2.0/microsoft.aspnetcore.hosting.abstractions.2.2.0.nupkg.sha512",
     "/home/artur/.nuget/packages/microsoft.aspnetcore.hosting.server.abstractions/2.2.0/microsoft.aspnetcore.hosting.server.abstractions.2.2.0.nupkg.sha512",
     "/home/artur/.nuget/packages/microsoft.aspnetcore.html.abstractions/2.2.0/microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
-    "/home/artur/.nuget/packages/microsoft.aspnetcore.http/2.2.0/microsoft.aspnetcore.http.2.2.0.nupkg.sha512",
+    "/home/artur/.nuget/packages/microsoft.aspnetcore.http/2.2.2/microsoft.aspnetcore.http.2.2.2.nupkg.sha512",
     "/home/artur/.nuget/packages/microsoft.aspnetcore.http.abstractions/2.2.0/microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
     "/home/artur/.nuget/packages/microsoft.aspnetcore.http.extensions/2.2.0/microsoft.aspnetcore.http.extensions.2.2.0.nupkg.sha512",
     "/home/artur/.nuget/packages/microsoft.aspnetcore.http.features/2.2.0/microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",

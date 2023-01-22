@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Core.Entities;
 using Core.Exceptions;
@@ -11,17 +9,14 @@ namespace Infrastructure.Services
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IAccountRepository _accountRep;
-        private readonly ISignInManager _signInManager;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ISignInManager _signInManager;        
 
         public AuthenticationService(
             IAccountRepository accountRep, 
-            ISignInManager signInManager, 
-            IUnitOfWork unitOfWork)
+            ISignInManager signInManager)
         {
             _accountRep = accountRep;
             _signInManager = signInManager;
-            _unitOfWork = unitOfWork;
         }
 
         public async Task RegisterAsync(Account account, string password)
@@ -36,7 +31,7 @@ namespace Infrastructure.Services
 
         public async Task CreateAccountAsync(Account account, string password)
         {
-            account.Password = new PasswordHasher<User>().HashPassword(account, password);
+            account.Password = new PasswordHasher<Account>().HashPassword(account, password);
             account.CreateDate = DateTime.UtcNow;
 
             await _accountRep.AddAsync(account);
