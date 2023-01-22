@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "jTKpYI8UUO+pGD8oTEteeQX7AMHwS9+0LPBHaykhpBZOiScSHkWxFT/xHIou/yCNtcAC5B+wkBNDiHIVYGxygA==",
+  "dgSpecHash": "V9pLARY0m+5wQx/dRRXBuWeEJKI2epbaEXhC3fkdgj1c2jARhuWJfyhvtTTCcFNMGnoV7PIpZ0vmf8/NwJ5Kkw==",
   "success": true,
   "projectFilePath": "/home/artur/Документы/WebApps/WebSocial/Web/Web.csproj",
   "expectedPackageFiles": [
+    "/home/artur/.nuget/packages/dapper/2.0.123/dapper.2.0.123.nupkg.sha512",
     "/home/artur/.nuget/packages/google.protobuf/3.19.4/google.protobuf.3.19.4.nupkg.sha512",
     "/home/artur/.nuget/packages/k4os.compression.lz4/1.2.6/k4os.compression.lz4.1.2.6.nupkg.sha512",
     "/home/artur/.nuget/packages/k4os.compression.lz4.streams/1.2.6/k4os.compression.lz4.streams.1.2.6.nupkg.sha512",

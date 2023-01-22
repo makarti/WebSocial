@@ -10,3 +10,6 @@
 /home/artur/Документы/WebApps/WebSocial/Common/Infrastructure/obj/Debug/net6.0/Infrastructure.dll
 /home/artur/Документы/WebApps/WebSocial/Common/Infrastructure/obj/Debug/net6.0/ref/Infrastructure.dll
 /home/artur/Документы/WebApps/WebSocial/Common/Infrastructure/obj/Debug/net6.0/Infrastructure.pdb
+/home/artur/Документы/WebApps/WebSocial/Common/Infrastructure/bin/Debug/net6.0/Core.dll
+/home/artur/Документы/WebApps/WebSocial/Common/Infrastructure/bin/Debug/net6.0/Core.pdb
+/home/artur/Документы/WebApps/WebSocial/Common/Infrastructure/obj/Debug/net6.0/Infrastructure.csproj.CopyComplete

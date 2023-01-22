@@ -1,9 +1,9 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Core.Exceptions;
 using Core.Services;
 using Web.ViewModels;
+using IAuthenticationService = Core.Services.IAuthenticationService;
 
 namespace Web.Controllers;
 
@@ -42,11 +42,11 @@ public class LoginController : Controller
         return View("Index", model);
     }
 
-    // [HttpGet]
-    // [Route("Logout")]
-    // public async Task<IActionResult> Logout()
-    // {
-    //     await HttpContext.SignOutAsync();
-    //     return RedirectToAction("Index", "Home");
-    // }
+    [HttpGet]
+    [Route("Logout")]
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync();
+        return RedirectToAction("Index", "Home");
+    }
 }

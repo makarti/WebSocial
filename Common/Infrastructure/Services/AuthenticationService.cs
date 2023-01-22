@@ -25,12 +25,11 @@ namespace Infrastructure.Services
             if (existingAccount != null) throw new AuthenticationException($"account {account.Login} already exists");
 
             await CreateAccountAsync(account, password);
-
-            await _unitOfWork.CommitAsync();
         }
 
         public async Task CreateAccountAsync(Account account, string password)
         {
+            account.Id = Guid.NewGuid();
             account.Password = new PasswordHasher<Account>().HashPassword(account, password);
             account.CreateDate = DateTime.UtcNow;
 
