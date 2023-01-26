@@ -39,7 +39,7 @@ namespace Infrastructure.Services
         public async Task<Account> LoginAsync(string login, string password)
         {
             var account = await _accountRep.GetAsync(login);
-            if (login == null) throw new AuthenticationException($"Account {login} not found");
+            if (account == null) throw new AuthenticationException($"Account {login} not found");
 
             var verificationResult = new PasswordHasher<Account>().VerifyHashedPassword(account, account.Password, password);
             if (verificationResult != PasswordVerificationResult.Success) throw new AuthenticationException("Invalid password");

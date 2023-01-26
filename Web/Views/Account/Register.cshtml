@@ -1,0 +1,63 @@
+@model Web.ViewModels.RegisterViewModel
+
+@{    
+    ViewBag.Title = "Регистрация";
+}
+
+<div class="text-center">
+    <h1 class="h3 mb-3 font-weight-normal">Registration</h1>
+
+    <form class="form-signin" asp-controller="Account" asp-action="Register" method="post">        
+        <div asp-validation-summary="All"></div>
+        
+        <div>
+            <label class="sr-only" asp-for="Login">Login</label>
+            <input class="form-control" type="text" asp-for="Login" placeholder="Login" />
+        </div>
+        
+        <div>
+            <label class="sr-only" asp-for="FirstName">FirstName</label>
+            <input class="form-control" type="text" asp-for="FirstName" placeholder="FirstName" />
+        </div>
+        
+        <div>
+            <label class="sr-only" asp-for="LastName">LastName</label>
+            <input class="form-control" type="text" asp-for="LastName" placeholder="LastName" />
+        </div>
+        
+        <div>
+            <label class="sr-only" asp-for="Age">Age</label>
+            <input class="form-control" type="number" asp-for="Age" placeholder="Age" />
+        </div>
+        
+        <div>
+            <label class="sr-only" asp-for="Gender">Gender</label>
+            <select class="sr-only" asp-for="Gender">
+                <option value="1">Male</option>
+                <option value="2">Female</option>
+            </select>
+        </div>
+        
+        <div>
+            <label class="sr-only" asp-for="City">City</label>
+            <input class="form-control" type="text" asp-for="City" placeholder="City" />
+        </div>
+        
+        <div>
+            <label class="sr-only" asp-for="Interests">Interests</label>
+            <input class="form-control" type="text" asp-for="Interests" placeholder="Interests" />
+        </div>
+        
+        <div>
+            <label class="sr-only" asp-for="Password">Password</label>
+            <input class="form-control" type="password" asp-for="Password" placeholder="Password"/>
+        </div>
+        
+        <div>
+            <label class="sr-only" asp-for="ConfirmPassword">ConfirmPassword</label>
+            <input class="form-control" type="password" asp-for="ConfirmPassword" placeholder="Confirm Password"/>
+        </div>
+     
+        <button class="btn btn-lg btn-primary btn-block login-button" type="submit">Создать</button>
+    </form>
+</div>

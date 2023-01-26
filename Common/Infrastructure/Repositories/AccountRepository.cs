@@ -17,7 +17,7 @@ namespace Infrastructure.Repositories
 
             using(var connection = DBUtils.GetDBConnection())
             {
-                var account = await connection.QuerySingleAsync<Account>(sql, login);
+                var account = await connection.QuerySingleOrDefaultAsync<Account>(sql, new {login});
                 return account;
             }
         }
@@ -36,8 +36,8 @@ namespace Infrastructure.Repositories
         public async Task AddAsync(Account account)
         {
             const string sql =
-                @"insert into Account (Id, Login, Email, Password, FirstName, LastName, Age, Gender, Interests, City, CreateDate) 
-                  values (@Id, @Login, @Email, @Password, @FirstName, @LastName, @Age, @Gender, @Interests, @City, @CreateDate);";
+                @"insert into Account (Id, Login, Password, FirstName, LastName, Age, Gender, Interests, City, CreateDate) 
+                  values (@Id, @Login, @Password, @FirstName, @LastName, @Age, @Gender, @Interests, @City, @CreateDate);";
 
             using(var connection = DBUtils.GetDBConnection())
             {

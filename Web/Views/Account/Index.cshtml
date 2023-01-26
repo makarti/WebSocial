@@ -1,0 +1,27 @@
+@model Web.ViewModels.LoginViewModel
+
+@{
+    ViewBag.Title = "Вход";
+}
+
+<div class="text-center">
+    <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+
+    <form class="form-signin" asp-controller="Account" asp-action="Login" method="post">
+        <div asp-validation-summary="All"></div>
+
+        <div>
+            <label class="sr-only" asp-for="Login">Login</label>
+            <input class="form-control" type="text" asp-for="Login" placeholder="Login"/>
+        </div>
+        <div>
+            <label class="sr-only" asp-for="Password">Password</label>
+            <input type="password" class="form-control" asp-for="Password" placeholder="Password"/>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+    </form>
+
+    <div>
+        Вы еще не зарегистрированы? - <a asp-controller="Account" asp-action="Register">Регистрация</a>
+    </div>
+</div>
