@@ -1,0 +1,54 @@
+@model Web.ViewModels.ProfileViewModel
+
+@{    
+    ViewBag.Title = "Профиль";
+}
+
+<div class="text-center">
+    <h1 class="h3 mb-3 font-weight-normal">Профиль</h1>
+
+    <form class="form-signin" asp-controller="Profile" asp-action="Edit" method="post">        
+        <div asp-validation-summary="All"></div>
+        
+        <div>
+            <label class="sr-only" asp-for="Login">Login</label>
+            <input class="form-control" type="text" disabled value="@Model.Login" />
+        </div>
+        
+        <div>
+            <label class="sr-only" asp-for="FirstName">FirstName</label>
+            <input class="form-control" type="text" asp-for="FirstName" value="@Model.FirstName" />
+        </div>
+        
+        <div>
+            <label class="sr-only" asp-for="LastName">LastName</label>
+            <input class="form-control" type="text" asp-for="LastName" value="@Model.LastName" />
+        </div>
+        
+        <div>
+            <label class="sr-only" asp-for="Age">Age</label>
+            <input class="form-control" type="number" asp-for="Age" value="@Model.Age" />
+        </div>
+        
+        <div>
+            <label class="sr-only" asp-for="Gender">Gender</label>
+            <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Core.Enum.GenderType>()"></select>
+            @* <select class="sr-only" asp-for="Gender">
+                <option value="1" @(Model.Gender == 1 ? "selected": "")>Male</option>
+                <option value="2" @(Model.Gender == 2 ? "selected": "")>Female</option>
+            </select> *@
+        </div>
+        
+        <div>
+            <label class="sr-only" asp-for="City">City</label>
+            <input class="form-control" type="text" asp-for="City" value="@Model.City" />
+        </div>
+        
+        <div>
+            <label class="sr-only" asp-for="Interests">Interests</label>
+            <input class="form-control" type="text" asp-for="Interests" value="@Model.Interests" />
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block login-button" type="submit">Сохранить</button>
+    </form>
+</div>

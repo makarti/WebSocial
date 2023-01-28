@@ -18,8 +18,8 @@ public class AccountController : Controller
     }
 
     [HttpGet]
-    [Route("Index")]
-    public IActionResult Index()
+    [Route("Login")]
+    public IActionResult Login()
     {
         return View();
     }
@@ -88,8 +88,6 @@ public class AccountController : Controller
         {
             ModelState.AddModelError("", e.Message);
         }
-
-
         return View("Index", model);
     }
 }

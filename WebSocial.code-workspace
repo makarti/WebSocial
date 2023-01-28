@@ -12,6 +12,9 @@
 			"**/bin": true,
 			"**/obj": true,
 			"**/*.sln": true
-		}
+		},
+		"liveServer.settings.multiRootWorkspaceName": "Web",
+		"liveServer.settings.AdvanceCustomBrowserCmdLine": "",
+		"liveServer.settings.port": 5263
 	}
 }

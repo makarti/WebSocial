@@ -32,10 +32,7 @@
         
         <div>
             <label class="sr-only" asp-for="Gender">Gender</label>
-            <select class="sr-only" asp-for="Gender">
-                <option value="1">Male</option>
-                <option value="2">Female</option>
-            </select>
+            <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Core.Enum.GenderType>()"></select>
         </div>
         
         <div>

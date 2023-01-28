@@ -21,8 +21,8 @@ SqlMapper.AddTypeHandler(new SqlGuidTypeHandler());
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
         .AddCookie(options =>
         {
-            options.LoginPath = "/Login";
-            options.LogoutPath = "/Login/Logout";
+            options.LoginPath = "/Account/Login";
+            options.LogoutPath = "/Account/Logout";
             options.Events = new CookieAuthenticationEvents
             {
                 OnValidatePrincipal = PrincipalValidator.ValidateAsync
@@ -33,6 +33,7 @@ services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 //services.AddAutoMapper(typeof(Startup).Assembly);
 services.AddScoped<ISignInManager, SignInManager>();
 services.AddScoped<IAuthenticationService, AuthenticationService>();
+services.AddScoped<IProfileService, ProfileService>();
 services.AddScoped<IAccountContext, AccountContext>();
 services.AddScoped<IAccountRepository, AccountRepository>();
 //services.AddScoped<IFriendshipRepository, FriendshipRepository>();
