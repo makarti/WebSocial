@@ -4,7 +4,6 @@ namespace Web.ViewModels;
 
 public class ProfileViewModel
 {
-    public string Login { get; set; }
 
     [Required(ErrorMessage = "FirstName is required")]
     [StringLength(45)]

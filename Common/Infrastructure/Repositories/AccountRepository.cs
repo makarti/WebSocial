@@ -44,5 +44,21 @@ namespace Infrastructure.Repositories
                 await connection.ExecuteAsync(sql, account);
             }
         }
+        public async Task EditAsync(Account account)
+        {
+            const string sql = @"update Account set 
+                FirstName = @FirstName,
+                LastName = @LastName,
+                City = @City,
+                Gender = @Gender,
+                Age = @Age,
+                Interests = @Interests
+                where Login = @Login;";
+                
+            using(var connection = DBUtils.GetDBConnection())
+            {
+                await connection.ExecuteAsync(sql, account);
+            }
+        }
     }
 }

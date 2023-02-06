@@ -10,9 +10,8 @@
     <form class="form-signin" asp-controller="Profile" asp-action="Edit" method="post">        
         <div asp-validation-summary="All"></div>
         
-        <div>
-            <label class="sr-only" asp-for="Login">Login</label>
-            <input class="form-control" type="text" disabled value="@Model.Login" />
+        <div>            
+            <h3>@ViewBag.Login</h3>
         </div>
         
         <div>
@@ -33,10 +32,6 @@
         <div>
             <label class="sr-only" asp-for="Gender">Gender</label>
             <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Core.Enum.GenderType>()"></select>
-            @* <select class="sr-only" asp-for="Gender">
-                <option value="1" @(Model.Gender == 1 ? "selected": "")>Male</option>
-                <option value="2" @(Model.Gender == 2 ? "selected": "")>Female</option>
-            </select> *@
         </div>
         
         <div>

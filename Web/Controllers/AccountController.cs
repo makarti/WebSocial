@@ -78,7 +78,7 @@ public class AccountController : Controller
             await _authenticationService.RegisterAsync(createdAccount, model.Password);
             await _authenticationService.LoginAsync(model.Login, model.Password);
 
-            return RedirectToAction("CreateProfile");
+            return RedirectToAction("Index", "Profile");
         }
         catch (AuthenticationException e)
         {

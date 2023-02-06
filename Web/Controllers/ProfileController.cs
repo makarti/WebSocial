@@ -1,4 +1,5 @@
 using Core.Entities;
+using Core.Exceptions;
 using Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,8 +25,8 @@ public class ProfileController : Controller
     public IActionResult Index()
     {
         var account = _accountContext.Account;
+        ViewBag.Login = account.Login;
         return View(new ProfileViewModel{
-            Login = account.Login,
             FirstName = account.FirstName,
             LastName = account.LastName,
             Age = account.Age,
@@ -43,8 +44,8 @@ public class ProfileController : Controller
 
         try
         {
-            await _profileService.EditAsync(new Account {
-                Login = model.Login,
+            await _profileService.EditAsync(new Account {                
+                Login = _accountContext.Account.Login,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 City = model.City,
@@ -52,11 +53,17 @@ public class ProfileController : Controller
                 Gender = (Core.Enum.GenderType)model.Gender,
                 Interests = model.Interests
             });
+
+            return RedirectToAction("Index");
+        }
+        catch (AccountIsNotFoundException e)
+        {
+            ModelState.AddModelError("", e.Message);
         }
         catch (Exception e)
         {
             ModelState.AddModelError("", e.Message);
         }
-        return View("Index", model);
+        return View("Edit", model);
     }
 }
