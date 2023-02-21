@@ -6,10 +6,10 @@ namespace Infrastructure.Extensions;
 
 public static class ClaimExtension
 {
-    public static long GetAccountId(this ClaimsPrincipal principal)
+    public static Guid GetAccountId(this ClaimsPrincipal principal)
     {
         var accountId = principal.Claims.FirstOrDefault(claim => claim.Type == ClaimConstants.Id)?.Value;
-        if (!long.TryParse(accountId, out var id)) throw new ArgumentException("Invalid id claim");
+        if (!Guid.TryParse(accountId, out var id)) throw new ArgumentException("Invalid id claim");
         return id;
     }
     public static string GetLogin(this ClaimsPrincipal principal)

@@ -1,0 +1,21 @@
+@model IEnumerable<Web.ViewModels.ProfileViewModel>
+
+@{    
+    ViewBag.Title = "Поиск друзей";
+}
+
+<div class="text-center">    
+    @foreach(var account in Model)
+    {
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">@account.FirstName @account.LastName @account.Login</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Город @account.City</h6>
+                <p class="card-text">Возраст @account.Age</p>
+                <p class="card-text">Пол @account.Gender</p>
+                <p class="card-text">Интересы @account.Interests</p>
+                <a href="/Friendship/RemoveFriend/@account.Id" class="btn btn-primary">Удалить</a>
+            </div>
+        </div>        
+    }
+</div>

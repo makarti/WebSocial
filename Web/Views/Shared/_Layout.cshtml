@@ -21,11 +21,15 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Friendship" asp-action="Index">Друзья</a>                            
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Выйти</a>                            
+                            <form class="form-search" asp-controller="Profile" asp-action="Search" method="post">
+                                <input class="form-control" type="text" name="name" placeholder="Поиск друзей..." />
+                                <button class="btn btn-search" type="submit"></button>
+                            </form>
                         </li>
                     </ul>
                 </div>
                 <div class="text-dark my-2 my-lg-0">@User.Identity.Name</div>
+                <div class="text-dark my-2 my-lg-0"><a class="text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Выйти</a>  </div>
             }
             else
             {

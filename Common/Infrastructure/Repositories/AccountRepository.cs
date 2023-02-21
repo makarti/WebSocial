@@ -22,17 +22,6 @@ namespace Infrastructure.Repositories
             }
         }
 
-        public async Task<ICollection<Account>> GetAllAsync()
-        {
-            const string sql = @"select * from Account;";
-
-            using(var connection = DBUtils.GetDBConnection())
-            {
-                var account = await connection.QueryAsync<Account>(sql);
-                return account.ToArray();
-            }
-        }
-
         public async Task AddAsync(Account account)
         {
             const string sql =
@@ -58,6 +47,29 @@ namespace Infrastructure.Repositories
             using(var connection = DBUtils.GetDBConnection())
             {
                 await connection.ExecuteAsync(sql, account);
+            }
+        }
+
+        public async Task<IEnumerable<Account>> SearchAsync(string name)
+        {
+            const string sql = @"select * from Account
+                where FirstName like @name or LastName like @name;";
+                
+            using(var connection = DBUtils.GetDBConnection())
+            {
+                var accounts = await connection.QueryAsync<Account>(sql, new {name = "%" + name + "%"});
+                return accounts.ToArray();
+            }
+        }
+
+        public async Task<Account> GetByIdAsync(Guid accountId)
+        {
+            const string sql = @"select * from Account
+                where Id = @accountId;";
+                
+            using(var connection = DBUtils.GetDBConnection())
+            {
+                return await connection.QuerySingleOrDefaultAsync<Account>(sql, new {accountId});
             }
         }
     }

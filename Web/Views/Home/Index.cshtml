@@ -1,8 +1,14 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Социальная сеть";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Социальная сеть</h1>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>Перейти в <a href="/Profile/Index">профиль</a>.</p>
+    }
+    else{
+        <p><a href="/Account/Login">Войти</a>.</p>
+    }
 </div>

@@ -26,7 +26,7 @@ public class ProfileController : Controller
     {
         var account = _accountContext.Account;
         ViewBag.Login = account.Login;
-        return View(new ProfileViewModel{
+        return View(new EditProfileViewModel{
             FirstName = account.FirstName,
             LastName = account.LastName,
             Age = account.Age,
@@ -38,7 +38,7 @@ public class ProfileController : Controller
 
     [HttpPost]
     [Route("Edit")]
-    public async Task<IActionResult> Edit(ProfileViewModel model)
+    public async Task<IActionResult> Edit(EditProfileViewModel model)
     {
         if (!ModelState.IsValid) return View("Index", model);
 
@@ -65,5 +65,39 @@ public class ProfileController : Controller
             ModelState.AddModelError("", e.Message);
         }
         return View("Edit", model);
+    }
+
+    [Route("Search")]
+    public async Task<IActionResult> Search(string name)
+    {
+        var accounts = (await _profileService.SearchAsync(name))
+                                             .Select(s => new ProfileViewModel
+                                             {
+                                                 Id = s.Id,
+                                                 Login = s.Login,
+                                                 FirstName = s.FirstName,
+                                                 LastName = s.LastName,
+                                                 Age = s.Age,
+                                                 City = s.City,
+                                                 Gender = s.Gender == Core.Enum.GenderType.Female ? "Женский" : "Мужской",
+                                                 Interests = s.Interests
+                                             });
+        return View(accounts);
+    }
+
+    [Route("Get")]
+    public async Task<IActionResult> Get(Guid accountId)
+    {
+        var account = await _profileService.GetByIdAsync(accountId);
+        return View(new ProfileViewModel{
+            Id = account.Id,
+            Login = account.Login,
+            FirstName = account.FirstName,
+            LastName = account.LastName,
+            Age = account.Age,
+            City = account.City,
+            Gender = account.Gender == Core.Enum.GenderType.Female ? "Женский" : "Мужской",
+            Interests = account.Interests
+        });
     }
 }

@@ -28,16 +28,14 @@ services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 OnValidatePrincipal = PrincipalValidator.ValidateAsync
             };
         });
-
-//services.AddOptions<ConnectionStrings>().Bind(Configuration.GetSection("ConnectionStrings"));
-//services.AddAutoMapper(typeof(Startup).Assembly);
+        
 services.AddScoped<ISignInManager, SignInManager>();
 services.AddScoped<IAuthenticationService, AuthenticationService>();
 services.AddScoped<IProfileService, ProfileService>();
 services.AddScoped<IAccountContext, AccountContext>();
 services.AddScoped<IAccountRepository, AccountRepository>();
-//services.AddScoped<IFriendshipRepository, FriendshipRepository>();
-//services.AddScoped<IFriendshipService, FriendshipService>();
+services.AddScoped<IFriendshipRepository, FriendshipRepository>();
+services.AddScoped<IFriendshipService, FriendshipService>();
 
 var app = builder.Build();
 

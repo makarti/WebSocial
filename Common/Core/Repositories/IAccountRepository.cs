@@ -5,7 +5,8 @@ namespace Core.Repositories;
 public interface IAccountRepository
 {
     Task<Account> GetAsync(string login);
-    Task<ICollection<Account>> GetAllAsync();
+    Task<IEnumerable<Account>> SearchAsync(string name);
+    Task<Account> GetByIdAsync(Guid accountId);
     Task AddAsync(Account account);
     Task EditAsync(Account account);
 }

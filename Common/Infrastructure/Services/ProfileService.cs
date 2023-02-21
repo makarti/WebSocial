@@ -21,4 +21,14 @@ public class ProfileService : IProfileService
 
         await _accountRep.EditAsync(account);
     }
+
+    public async Task<IEnumerable<Account>> SearchAsync(string name)
+    {
+        return await _accountRep.SearchAsync(name);
+    }
+
+    public async Task<Account> GetByIdAsync(Guid accountId)
+    {
+        return await _accountRep.GetByIdAsync(accountId);
+    }
 }
