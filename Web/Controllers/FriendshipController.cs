@@ -42,15 +42,42 @@ public class FriendshipController : Controller
     [Route("Incoming")]
     public async Task<IActionResult> Incoming()
     {
-        var requests = await _friendshipService.GetsAsync(Core.Enum.FriendshipStatusType.RequestSent);        
-        return View(requests.Where(w => w.AddresserId == _accountContext.Account.Id));
+        var requests = (await _friendshipService.GetsAsync(Core.Enum.FriendshipStatusType.RequestSent))
+                                                .Where(w => w.AddresserId == _accountContext.Account.Id)
+                                                .Select(s => s.Requester)
+                                                .Select(s => new ProfileViewModel
+            {
+                Id = s.Id,
+                Login = s.Login,
+                FirstName = s.FirstName,
+                LastName = s.LastName,
+                Age = s.Age,
+                City = s.City,
+                Gender = s.Gender == Core.Enum.GenderType.Female ? "Женский" : "Мужской",
+                Interests = s.Interests  
+            });
+            
+        return View(requests);
     }
 
     [Route("SentRequests")]
     public async Task<IActionResult> SentRequests()
     {
-        var requests = await _friendshipService.GetsAsync(Core.Enum.FriendshipStatusType.RequestSent);        
-        return View(requests.Where(w => w.RequesterId == _accountContext.Account.Id));
+        var requests = (await _friendshipService.GetsAsync(Core.Enum.FriendshipStatusType.RequestSent))
+                                                .Where(w => w.RequesterId == _accountContext.Account.Id)
+                                                .Select(s => s.Addresser)
+                                                .Select(s => new ProfileViewModel
+            {
+                Id = s.Id,
+                Login = s.Login,
+                FirstName = s.FirstName,
+                LastName = s.LastName,
+                Age = s.Age,
+                City = s.City,
+                Gender = s.Gender == Core.Enum.GenderType.Female ? "Женский" : "Мужской",
+                Interests = s.Interests  
+            });
+        return View(requests);
     }
 
     [Route("AddFriend/{id}")]
