@@ -11,12 +11,12 @@ public class FriendshipRepository : IFriendshipRepository
     public async Task<IEnumerable<Friendship>> GetsAsync(Guid accountId, FriendshipStatusType statusType)
     {           
         const string sql = @"select friendship.*, requester.*, addresser.*
-                    from Friendship
-                    join Account requester on requester.Id = Friendship.RequesterId
-                    join Account addresser on addresser.Id = Friendship.AddresserId
+                    from Friendship friendship
+                    join Account requester on requester.Id = friendship.RequesterId
+                    join Account addresser on addresser.Id = friendship.AddresserId
                     where friendship.Status = @status and
-                    friendship.RequesterId = @accountId or 
-                    friendship.AddresserId = @accountId;";
+                    (friendship.RequesterId = @accountId or 
+                    friendship.AddresserId = @accountId);";
                 
         using(var connection = DBUtils.GetDBConnection())
         {
