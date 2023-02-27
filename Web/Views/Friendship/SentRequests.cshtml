@@ -3,6 +3,17 @@
 @{    
     ViewBag.Title = "Поиск друзей";
 }
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+  <a class="nav-link" href="/Friendship/Index">Друзья</a>
+  </li>
+  <li class="nav-item">
+  <a class="nav-link" href="/Friendship/Incoming">Входящие</a>
+  </li>
+  <li class="nav-item">
+  <a class="nav-link active" href="#">Исходящие</a>
+  </li>
+</ul>
 
 <div class="text-center">    
     @foreach(var account in Model)

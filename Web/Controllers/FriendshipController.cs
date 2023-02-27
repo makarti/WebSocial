@@ -87,14 +87,14 @@ public class FriendshipController : Controller
         return RedirectToAction("SentRequests");
     }
 
-    [Route("AcceptFriend")]
+    [Route("AcceptFriend/{id}")]
     public async Task<IActionResult> AcceptFriend(Guid id)
     {
         await _friendshipService.AcceptAsync(id);
         return RedirectToAction("Incoming");
     }
 
-    [Route("RemoveFriend")]
+    [Route("RemoveFriend/{id}")]
     public async Task<IActionResult> RemoveFriend(Guid id)
     {
         await _friendshipService.RemoveAsync(id);

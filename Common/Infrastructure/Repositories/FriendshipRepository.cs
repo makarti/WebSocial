@@ -33,14 +33,14 @@ public class FriendshipRepository : IFriendshipRepository
             return friendships.ToArray();
         }
     }
-    public async Task<Friendship> GetAsync(Guid reqeusterId, Guid addressertId)
+    public async Task<Friendship> GetAsync(Guid reqeusterId, Guid addresserId)
     {           
         const string sql = @"select friendship.*, requester.*, addresser.*
-                    from Friendship
-                    join Account requester on requester.Id = Friendship.RequesterId
-                    join Account addresser on addresser.Id = Friendship.AddresserId
+                    from Friendship friendship
+                    join Account requester on requester.Id = friendship.RequesterId
+                    join Account addresser on addresser.Id = friendship.AddresserId
                     where friendship.RequesterId = @reqeusterId and 
-                          friendship.AddresserId = @addressertId;";
+                          friendship.AddresserId = @addresserId;";
                 
         using(var connection = DBUtils.GetDBConnection())
         {
@@ -52,7 +52,7 @@ public class FriendshipRepository : IFriendshipRepository
 
                         return friendship;
                     },
-                    new { reqeusterId, addressertId },
+                    new { reqeusterId, addresserId },
                     splitOn: "Id");
             return friendships.FirstOrDefault();
         }

@@ -85,10 +85,10 @@ public class ProfileController : Controller
         return View(accounts);
     }
 
-    [Route("Get")]
-    public async Task<IActionResult> Get(Guid accountId)
+    [Route("Get/{id}")]
+    public async Task<IActionResult> Get(Guid id)
     {
-        var account = await _profileService.GetByIdAsync(accountId);
+        var account = await _profileService.GetByIdAsync(id);
         return View(new ProfileViewModel{
             Id = account.Id,
             Login = account.Login,
