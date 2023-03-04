@@ -4,3 +4,5 @@ Web/bin/
 Web/obj/
 Common/Core/bin/
 Common/Core/obj/
+/.vs
+/Web/.vs

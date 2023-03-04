@@ -1,4 +1,3 @@
-
 using Core.Handlers;
 using Core.Repositories;
 using Core.Services;
@@ -9,7 +8,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Web.Validator;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 var services = builder.Services;
 
