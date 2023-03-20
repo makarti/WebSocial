@@ -46,7 +46,7 @@ public class DBUtils
     private static void InitializeTables()
     {
         const string sqltables = @"
-                            CREATE TABLE WebSocial.`Account` (
+                            CREATE TABLE if not exists WebSocial.`Account` (
                               `Id` varchar(36) NOT NULL,
                               `Login` varchar(45) NOT NULL,
                               `Password` varchar(100) NOT NULL,
@@ -62,7 +62,7 @@ public class DBUtils
                               UNIQUE KEY `Login_UNIQUE` (`Login`)
                             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-                            CREATE TABLE WebSocial.`Friendship` (
+                            CREATE TABLE if not exists WebSocial.`Friendship` (
                               `RequesterId` varchar(36) NOT NULL,
                               `AddresserId` varchar(36) NOT NULL,
                               `Created` datetime NOT NULL,
