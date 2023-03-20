@@ -6,3 +6,5 @@ Common/Core/bin/
 Common/Core/obj/
 /.vs
 /Web/.vs
+/bin/Debug
+/obj

@@ -1,0 +1,30 @@
+version: '3.4'
+
+networks:
+  backend:
+
+services:
+  websocialdb:
+    container_name: websocial-db
+    image: mysql:8.0.32
+    environment:
+      - MYSQL_ROOT_PASSWORD=Password123#@!
+    networks:
+      - backend
+    ports:
+      - 8114:3306
+
+  web:
+    container_name: web-social
+    image: ${DOCKER_REGISTRY-}web
+    build:
+      context: .
+      dockerfile: Web/Dockerfile
+    networks:
+      - backend
+    ports:
+      - 8112:80
+    environment:
+      - DB_HOST=websocialdb
+      - DB_NAME=WebSocial
+      - DB_ROOT_PASSWORD=Password123#@!
