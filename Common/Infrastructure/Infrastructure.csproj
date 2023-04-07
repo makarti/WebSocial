@@ -6,7 +6,7 @@
     <PackageReference Include="Dapper" Version="2.0.123" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="6.0.9" />
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.13" />
-    <PackageReference Include="MySql.Data" Version="8.0.31" />
+	  <PackageReference Include="MySqlConnector" Version="2.2.5" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>

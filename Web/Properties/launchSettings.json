@@ -4,7 +4,10 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DB_HOST": "localhost",
+        "DB_NAME": "WebSocial",
+        "DB_ROOT_PASSWORD": "Password123#@!"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5262"

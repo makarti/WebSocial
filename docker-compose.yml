@@ -11,6 +11,7 @@ services:
       - MYSQL_ROOT_PASSWORD=Password123#@!
     networks:
       - backend
+    restart: always
     ports:
       - 8114:3306
 

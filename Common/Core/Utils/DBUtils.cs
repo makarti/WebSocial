@@ -1,7 +1,7 @@
-using Core.Configuration;
 using Core.Entities;
 using Dapper;
-using MySql.Data.MySqlClient;
+using MoreLinq;
+using MySqlConnector;
 
 namespace Core.Utils;
 
@@ -31,6 +31,7 @@ public class DBUtils
     {
         InitializeDatabase();
         InitializeTables();
+        AccountGenerate();
     }
 
     private static void InitializeDatabase()
@@ -76,4 +77,41 @@ public class DBUtils
         }
     }
     #endregion
+
+    #region accountgenerate
+    private static void AccountGenerate()
+    {
+        using (var connection = DBMySqlUtils.GetDBConnection(_host, _database, _password))
+        {
+            var count = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM Account");
+            if (count > 1000)
+                return;
+        }
+
+        var _faker = new AccountFaker();
+        var users = _faker.GetAccountGenerator().Generate(1000000);//1000000
+
+        const string sql =
+            @"insert into Account (Id, Login, Password, FirstName, LastName, Age, Gender, Interests, City, CreateDate) 
+                  values (@Id, @Login, @Password, @FirstName, @LastName, @Age, @Gender, @Interests, @City, @CreateDate);";
+
+
+        foreach (var batch in users.Batch(500))
+            AddUsers(batch.ToList());
+
+        void AddUsers(List<Account> users)
+        {
+            using (var connection = GetDBConnection())
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    foreach (var user in users)
+                        connection.Execute(sql, user, transaction);
+                    transaction.Commit();
+                }
+            }
+        }
+    }
+    #endregion 
 }

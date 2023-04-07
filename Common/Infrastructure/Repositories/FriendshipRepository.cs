@@ -3,11 +3,18 @@ using Core.Enum;
 using Core.Repositories;
 using Core.Utils;
 using Dapper;
+using Infrastructure.DAL;
 
 namespace Infrastructure.Repositories;
 
 public class FriendshipRepository : IFriendshipRepository
 {
+    private readonly DbContext _dbContext;
+    public FriendshipRepository(DbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+
     public async Task<IEnumerable<Friendship>> GetsAsync(Guid accountId, FriendshipStatusType statusType)
     {           
         const string sql = @"select friendship.*, requester.*, addresser.*
@@ -16,9 +23,10 @@ public class FriendshipRepository : IFriendshipRepository
                     join Account addresser on addresser.Id = friendship.AddresserId
                     where friendship.Status = @status and
                     (friendship.RequesterId = @accountId or 
-                    friendship.AddresserId = @accountId);";
-                
-        using(var connection = DBUtils.GetDBConnection())
+                    friendship.AddresserId = @accountId);"
+        ;
+
+        return await _dbContext.ExecuteQueryAsync(async connection =>
         {
             var friendships = await connection.QueryAsync<Friendship, Account, Account, Friendship>(sql,
                     (friendship, requester, addresser) =>
@@ -28,10 +36,10 @@ public class FriendshipRepository : IFriendshipRepository
 
                         return friendship;
                     },
-                    new { accountId, status =  (byte)statusType},
+                    new { accountId, status = (byte)statusType },
                     splitOn: "Id");
             return friendships.ToArray();
-        }
+        });
     }
     public async Task<Friendship> GetAsync(Guid reqeusterId, Guid addresserId)
     {           
@@ -41,8 +49,8 @@ public class FriendshipRepository : IFriendshipRepository
                     join Account addresser on addresser.Id = friendship.AddresserId
                     where friendship.RequesterId = @reqeusterId and 
                           friendship.AddresserId = @addresserId;";
-                
-        using(var connection = DBUtils.GetDBConnection())
+
+        return await _dbContext.ExecuteQueryAsync(async connection =>
         {
             var friendships = await connection.QueryAsync<Friendship, Account, Account, Friendship>(sql,
                     (friendship, requester, addresser) =>
@@ -55,7 +63,7 @@ public class FriendshipRepository : IFriendshipRepository
                     new { reqeusterId, addresserId },
                     splitOn: "Id");
             return friendships.FirstOrDefault();
-        }
+        });
     }
     
 
@@ -65,16 +73,16 @@ public class FriendshipRepository : IFriendshipRepository
             @"insert into Friendship (RequesterId, AddresserId, Created, Status) 
                 values (@requesterId, @addresserId, @created, @status);";
 
-        using(var connection = DBUtils.GetDBConnection())
+        await _dbContext.ExecuteQueryAsync(async connection =>
         {
-            await connection.ExecuteAsync(sql, new 
+            await connection.ExecuteAsync(sql, new
             {
-                requesterId, 
-                addresserId, 
+                requesterId,
+                addresserId,
                 created = DateTime.UtcNow,
                 status = (byte)FriendshipStatusType.RequestSent
             });
-        }
+        });
     }
 
     public async Task UpdateStatusAsync(Guid requesterId, Guid addresserId, FriendshipStatusType statusType)
@@ -82,21 +90,21 @@ public class FriendshipRepository : IFriendshipRepository
         const string sql = @"update Friendship set 
             Status = @status
             where RequesterId = @requesterId and AddresserId = @addresserId;";
-            
-        using(var connection = DBUtils.GetDBConnection())
+
+        await _dbContext.ExecuteQueryAsync(async connection =>
         {
             await connection.ExecuteAsync(sql, new { status = (byte)statusType, requesterId, addresserId });
-        }
+        });
     }
 
     public async Task RemoveAsync(Guid requesterId, Guid addresserId)
     {        
         const string sql = @"delete from Friendship            
             where RequesterId = @requesterId and AddresserId = @addresserId LIMIT 1;";
-            
-        using(var connection = DBUtils.GetDBConnection())
+
+        await _dbContext.ExecuteQueryAsync(async connection =>
         {
             await connection.ExecuteAsync(sql, new { requesterId, addresserId });
-        }
+        });
     }
 }

@@ -15,19 +15,19 @@ public class FriendshipService : IFriendshipService
         _friendshipRep = friendshipRep;
     }
 
-    public async Task<IEnumerable<Friendship>> GetsAsync(FriendshipStatusType statusType)
+    public Task<IEnumerable<Friendship>> GetsAsync(FriendshipStatusType statusType)
     {
-        return await _friendshipRep.GetsAsync(_accountContext.Account.Id, statusType);
+        return _friendshipRep.GetsAsync(_accountContext.Account.Id, statusType);
     }
 
-    public async Task AddAsync(Guid addresserId)
+    public Task AddAsync(Guid addresserId)
     {
-        await _friendshipRep.AddAsync(_accountContext.Account.Id, addresserId);
+        return _friendshipRep.AddAsync(_accountContext.Account.Id, addresserId);
     }
 
-    public async Task AcceptAsync(Guid requesterId)
+    public Task AcceptAsync(Guid requesterId)
     {
-        await _friendshipRep.UpdateStatusAsync(requesterId, _accountContext.Account.Id, FriendshipStatusType.RequestAccepted);
+        return _friendshipRep.UpdateStatusAsync(requesterId, _accountContext.Account.Id, FriendshipStatusType.RequestAccepted);
     }
 
     public async Task RemoveAsync(Guid accountId)

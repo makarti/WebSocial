@@ -13,4 +13,7 @@
     <ProjectReference Include="..\Common\Core\Core.csproj" />
     <ProjectReference Include="..\Common\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="..\.dockerignore" />
+  </ItemGroup>
 </Project>

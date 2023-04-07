@@ -1,7 +1,9 @@
+using Core.Configuration;
 using Core.Handlers;
 using Core.Repositories;
 using Core.Services;
 using Dapper;
+using Infrastructure.DAL;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -26,7 +28,15 @@ services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 OnValidatePrincipal = PrincipalValidator.ValidateAsync
             };
         });
-        
+
+services.Configure<ConnectionSettings>(s =>
+{
+    s.Host = Environment.GetEnvironmentVariable("DB_HOST");
+    s.Database = Environment.GetEnvironmentVariable("DB_NAME");
+    s.Password = Environment.GetEnvironmentVariable("DB_ROOT_PASSWORD");
+});
+
+services.AddScoped<DbContext>();
 services.AddScoped<ISignInManager, SignInManager>();
 services.AddScoped<IAuthenticationService, AuthenticationService>();
 services.AddScoped<IProfileService, ProfileService>();
